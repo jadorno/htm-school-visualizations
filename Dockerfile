@@ -14,9 +14,9 @@ RUN apt update && apt upgrade -y \
 WORKDIR /usr/src
 
 RUN git clone "https://github.com/jadorno/htm-cell-viz.git" \
-&& cd /usr/src/htm-cell-viz \
-&& npm install \
-&& NODE_OPTIONS=--openssl-legacy-provider npm run build
+    && cd /usr/src/htm-cell-viz \
+    && npm install \
+    && NODE_OPTIONS=--openssl-legacy-provider npm run build
 
 FROM debian:bookworm
 
@@ -33,9 +33,10 @@ RUN apt update && apt upgrade -y \
 
 WORKDIR /usr/src/app
 
-COPY . .
-
+COPY package.json .
 RUN npm install
+
+COPY . .
 COPY --from=build-cell-viz /usr/src/htm-cell-viz/dist/cell-viz-3d-1.4.9.min.js /usr/src/app/static/js/third/cell-viz-3d-1.4.9.min.js
 
-CMD ["npm start"]
+CMD ["/usr/bin/npm", "start"]
