@@ -97,6 +97,6 @@ jobs:
       - name: Remove previous packages
         uses: actions/delete-package-versions@v4
         with:
-          package-name: 'htm-nupic-history-server'
+          package-name: 'htm-school-visualizations'
           package-type: 'container'
-          min-versions-to-keep: 1
+          min-versions-to-keep: 2
